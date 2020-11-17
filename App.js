@@ -10,29 +10,29 @@ import Signup from './src/pages/Signup';
 import UserFeed from './src/pages/UserFeed';
 
 const Stack = createStackNavigator();
-// const dummyMatches = [
-//   {
-//     name: "Nick",
-//     id: 1,
-//     body: "Javascript extraordinaire",
-//     toLearn: "Python",
-//     toTeach: "Javascript",
-//   },
-//   {
-//     name: "Hideaki",
-//     id: 2,
-//     body: "Cool music cat",
-//     toLearn: "Javascript",
-//     toTeach: "C++",
-//   },
-//   {
-//     name: "Matt",
-//     id: 3,
-//     body: "Hacking is my life",
-//     toLearn: "C++",
-//     toTeach: "Python",
-//   },
-// ];
+const dummyMatches = [
+  {
+    name: "Nick",
+    id: 1,
+    body: "Javascript extraordinaire",
+    toLearn: "Python",
+    toTeach: "Javascript",
+  },
+  {
+    name: "Hideaki",
+    id: 2,
+    body: "Cool music cat",
+    toLearn: "Javascript",
+    toTeach: "C++",
+  },
+  {
+    name: "Matt",
+    id: 3,
+    body: "Hacking is my life",
+    toLearn: "C++",
+    toTeach: "Python",
+  },
+];
 
 const defUserObj = {
   isLoggedIn : false,
@@ -59,8 +59,8 @@ function App() {
 
   const getMatches = (id, toTeach, toLearn) => {
     const body = {
-      "learn_tech_id": 2,
-      "teach_tech_id_array": [4,5]
+      "learn_tech_id": 1,
+      "teach_tech_id_array": [1,2,3,4,5]
     };
     const options = {
       method: 'POST',
@@ -69,7 +69,7 @@ function App() {
       },
       body: JSON.stringify(body)
     }
-    fetch('http://192.168.1.6:3000/user/matches', options)
+    fetch('https://PERSONALIP/user/matches', options)
     .then(res => res.json())
     .then(data => {
       console.log('just got back: ', data)
@@ -83,13 +83,13 @@ function App() {
       <Stack.Navigator initialRouteName="Log in">
         <Stack.Screen name="Signup" component={Signup} options={headerStyle} />
         <Stack.Screen name="Log in" options={headerStyle}>
-        {props => (<Login {...props} logIn={getMatches} />)}
+        {props => (<Login {...props} logIn={() => console.log(getMatches)} />)}
         </Stack.Screen>
         <Stack.Screen
           name="User Feed"
           options={headerStyle}
         >
-          {props => (<UserFeed {...props} matches={matches} />)}
+          {props => (<UserFeed {...props} matches={dummyMatches} />)}
         </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>

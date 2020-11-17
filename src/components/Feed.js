@@ -9,9 +9,9 @@ export default function Feed({ matches }) {
   function renderItem({ item }) {
     return (
       <FeedItem
-        name={item.user_name}
-        body={item.description}
-        id={item.user_id}
+        name={item.name}
+        body={item.body}
+        id={item.id}
       ></FeedItem>
     );
   }
@@ -21,7 +21,7 @@ export default function Feed({ matches }) {
     <FlatList
       data={matches}
       renderItem={renderItem}
-      keyExtractor={(item) => item.user_id.toString()}
+      keyExtractor={(item) => item.id.toString()}
     />
   );
 }
